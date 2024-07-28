@@ -61,6 +61,7 @@
     "minimatch": "^3.1.2",
     "mongoose": "^8.5.1",
     "ms": "^2.0.0",
+    "nanoid": "^5.0.7",
     "negotiator": "^0.6.3",
     "nodemon": "^3.1.4",
     "normalize-path": "^3.0.0",
@@ -82,6 +83,7 @@
     "serve-static": "^1.15.0",
     "set-function-length": "^1.2.2",
     "setprototypeof": "^1.2.0",
+    "short-unique-id": "^5.2.0",
     "side-channel": "^1.0.6",
     "simple-update-notifier": "^2.0.0",
     "statuses": "^2.0.1",
@@ -93,6 +95,7 @@
     "undefsafe": "^2.0.5",
     "unpipe": "^1.0.0",
     "utils-merge": "^1.0.1",
+    "uuid": "^10.0.0",
     "vary": "^1.1.2"
   },
   "scripts": {
