@@ -1,5 +1,14 @@
-const { v4: uuidv4 } = require('uuid');
 const URL = require('../models/url');
+
+function generateShortId(length = 8) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let shortId = '';
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        shortId += characters[randomIndex];
+    }
+    return shortId;
+}
 
 async function handleGenerateNewShortURL(req, res) {
     const body = req.body;
@@ -7,17 +16,29 @@ async function handleGenerateNewShortURL(req, res) {
         return res.status(400).json({ error: 'URL is required' });
     }
 
-    const shortId = uuidv4().slice(0, 8);
-    console.log(`Generated short ID: ${shortId}`);
+    let shortID;
+    let isUnique = false;
+    while (!isUnique) {
+        shortID = generateShortId();
+        console.log(`Generated potential short ID: ${shortID}`);
+        const existingUrl = await URL.findOne({ shortID });
+        if (!existingUrl) {
+            isUnique = true;
+        }
+    }
+
+    console.log(`Final short ID: ${shortID}`);
 
     try {
         const newURL = await URL.create({
-            shortId: shortId,
+            shortId: shortID,
             redirectURL: body.url,
             visitHistory: [],
         });
         console.log('New URL created:', newURL);
-        return res.json({ id: shortId });
+        return res.render("index",{
+            id: shortID,
+        });
     } catch (error) {
         console.error('Error creating short URL:', error);
         return res.status(500).json({ error: 'Internal Server Error' });
