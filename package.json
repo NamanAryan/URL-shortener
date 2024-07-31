@@ -62,6 +62,7 @@
     "mime-types": "^2.1.35",
     "minimatch": "^3.1.2",
     "mongoose": "^8.5.1",
+    "moongose": "^1.0.0",
     "ms": "^2.0.0",
     "nanoid": "^5.0.7",
     "negotiator": "^0.6.3",
