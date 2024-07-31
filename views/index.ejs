@@ -22,13 +22,13 @@
     <% if (locals.id)  { %>
       URL Generated: <a href = "http://localhost:8001/<%= id %>" target="_blank">http://localhost:8001/<%= id %> </a>
     <% } %>
-    <div class="table">
-
-         <table>
+    <% if(urls && urls.length > 0){ %>
+      <div class="table">
+        <table>
           <thead>
             <tr>
               <th>S.No.</th>
-              <th>Short ID</th>
+              <th>Short URL</th>
               <th>Redirect</th>
               <th>Clicks</th>
             </tr>
@@ -37,14 +37,15 @@
             <% urls.forEach((url, index) => { %>
               <tr>
                 <td> <%= index + 1 %> </td>
-                <td> <%= url.shortId %> </td>
-                <td> <%= url.redirectURL %> </td>
+                <td> <a href = "http://localhost:8001/<%= url.shortId %>" target="_blank">http://localhost:8001/<%= url.shortId %> </a> </td>
+                <td> <a href = "<%= url.redirectURL %>" target="_blank"><%= url.redirectURL %> </a> </td>
                 <td> <%= url.visitHistory.length %> </td>
               </tr>
             <% }); %>
           </tbody>
-         </table>
-  </div>
+        </table>
+      </div>
+    <% } %> 
   
 </body>
 </html>

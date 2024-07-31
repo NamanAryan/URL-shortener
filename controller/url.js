@@ -15,7 +15,6 @@ async function handleGenerateNewShortURL(req, res) {
     if (!body.url) {
         return res.status(400).json({ error: 'URL is required' });
     }
-
     let shortID;
     let isUnique = false;
     while (!isUnique) {
@@ -26,9 +25,7 @@ async function handleGenerateNewShortURL(req, res) {
             isUnique = true;
         }
     }
-
     console.log(`Final short ID: ${shortID}`);
-
     try {
         const newURL = await URL.create({
             shortId: shortID,
@@ -36,6 +33,7 @@ async function handleGenerateNewShortURL(req, res) {
             visitHistory: [],
         });
         console.log('New URL created:', newURL);
+        res.redirect('/');
         return res.render("index",{
             id: shortID,
         });
