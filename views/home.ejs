@@ -11,6 +11,9 @@
 <body>
     <h1>URL-Shortener</h1>
     
+    <% if (locals.id)  { %>
+      URL Generated: <a href = "http://localhost:8001/url/<%= id %>"> http://localhost:8001/<%= id %> </a>
+    <% } %>
     <form method="post" action="/url">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Enter your URL</label>
@@ -19,19 +22,15 @@
         <button type="submit" class="btn btn-primary" action = "post" >Generate Short URL</button>
     </form>
 
-    <% if (locals.id)  { %>
-      URL Generated: <a href = "http://localhost:8001/<%= id %>" target="_blank">http://localhost:8001/<%= id %> </a>
-    <% } %>
-    <% if(urls && urls.length > 0){ %>
+
       <div class="table">
+        <% if(locals.urls){ %>
         <table>
-          <thead>
-            <tr>
+          <thead> 
               <th>S.No.</th>
               <th>Short URL</th>
               <th>Redirect</th>
               <th>Clicks</th>
-            </tr>
           </thead>
           <tbody>
             <% urls.forEach((url, index) => { %>
@@ -44,8 +43,7 @@
             <% }); %>
           </tbody>
         </table>
-      </div>
-    <% } %> 
-  
+        <% } %>
+      </div>    
 </body>
 </html>
